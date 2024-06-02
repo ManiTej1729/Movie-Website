@@ -164,13 +164,13 @@
           <h2>{{ list_name }}</h2>
           <ul>
             {% for movie_name in movies %}
-            <li><span onclick="openMovie('{{ movie_name }}')">{{ movie_name }}</span><button class="remove-btn" onclick="removeMovie('{{ list_name }}', '{{ movie_name }}')">Remove</button></li>
+            <li onclick="openMovie('{{ movie_name }}')">{{ movie_name }}<button class="remove-btn" onclick="removeMovie('{{ list_name }}', '{{ movie_name }}')">Remove</button></li>
             {% endfor %}
           </ul>
         </div>
         {% endfor %}
         <div class="list create" onclick="createWatchList()">
-          <h2 onclick="createWatchList()">Create New WatchList</h2>
+          <h2>Create New WatchList</h2>
         </div>
       </div>
     </div>
