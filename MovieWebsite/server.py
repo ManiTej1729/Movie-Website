@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 import pymysql
 import bcrypt
+import datetime
 import requests
 
 app = Flask(__name__)
@@ -18,11 +19,11 @@ if mydb.open:
     cur = mydb.cursor()
     cur.execute("create database if not exists fasal;")
     cur.execute("use fasal")
-    cur.execute("CREATE TABLE IF NOT EXISTS users ( S_no INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(1000), email VARCHAR(1000), password VARCHAR(1000) );")
+    cur.execute("CREATE TABLE IF NOT EXISTS users ( S_no INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(1000), password VARCHAR(1000) );")
 else:
     print("Falied to connect")
     
-apikey = '19a01e2e'
+apikey = '8e52cc67'
     
 def hash_password(password):
     salt = bcrypt.gensalt()
@@ -52,7 +53,7 @@ def add(typer):
         cur.execute(cmd, (name, email, password))
         query = f'CREATE Table {name} (S_no INT PRIMARY KEY AUTO_INCREMENT, movies LONGTEXT, watchlist_name VARCHAR(1000));'
         print(query)
-        cur.execute(query)
+        # cur.execute(query)
         mydb.commit()
         session['username'] = name
         return redirect(url_for('home'))
