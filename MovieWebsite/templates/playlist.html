@@ -164,7 +164,9 @@
           <h2>{{ list_name }}</h2>
           <ul>
             {% for movie_name in movies %}
-            <li onclick="openMovie('{{ movie_name }}')">{{ movie_name }}<button class="remove-btn" onclick="removeMovie('{{ list_name }}', '{{ movie_name }}')">Remove</button></li>
+              {% if movie_name != "" %}
+              <li onclick="openMovie('{{ movie_name }}')">{{ movie_name }}<button class="remove-btn" onclick="removeMovie('{{ list_name }}', '{{ movie_name }}')">Remove</button></li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>
@@ -197,10 +199,17 @@
         const parent = document.querySelector("#main");
         const referenceElement = document.querySelector(".create");
         const newWatchListDiv = document.createElement("div");
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.innerHTML = "Delete";
+        deleteButton.addEventListener('click', () => {
+          deleteWatchList(name);
+        })
         const WatchListName = document.createElement("h2");
         WatchListName.innerHTML = name;
         const ulElement = document.createElement("ul");
         newWatchListDiv.classList.add("list");
+        newWatchListDiv.appendChild(deleteButton);
         newWatchListDiv.appendChild(WatchListName);
         newWatchListDiv.appendChild(ulElement);
         parent.insertBefore(newWatchListDiv, referenceElement);
