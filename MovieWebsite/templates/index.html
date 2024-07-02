@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <title>Fasal login</title>
     <style>
       body {
@@ -31,6 +31,7 @@
         background-color: black;
         border-radius: 20px;
       }
+
       .options {
         display: flex;
         justify-content: space-around;
@@ -44,12 +45,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
         cursor: pointer;
-        /* Cursor changes to pointer on hover */
         text-decoration: none;
-      }
-
-      .option:hover {
-        transform: translateY(-5px);
       }
 
       .option p {
@@ -70,26 +66,8 @@
         color: #e7b038;
         border-color: #e7b038;
         box-shadow: 0 0 10px #e7b038;
+        transform: translateY(-5px);
       }
-
-      .option p::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        background: radial-gradient(#e7b038 15%, transparent 16%);
-        background-size: 10px 10px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .option:hover p::before {
-        opacity: 1;
-      }
-      
     </style>
   </head>
   <header></header>
