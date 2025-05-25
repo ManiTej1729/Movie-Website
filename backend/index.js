@@ -65,7 +65,7 @@ app.post('/login', async (req, res) => {
     res.json({msg: "You don't have an account"})
   }
   else {
-    console.log(found)
+    // console.log(found)
     const isValid = await bcryptjs.compare(req.body.pwd, found.password)
     if (isValid) {
       res.json({ msg: "Login successful", uId: found._id, email: found.email })
@@ -145,7 +145,6 @@ app.post('/addMtoL', async (req, res) => {
       break
     }
   }
-  res.json({msg: 'wtf'})
 })
 
 app.listen(port, () => {

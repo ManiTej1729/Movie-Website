@@ -93,7 +93,6 @@ function Home () {
             </li>
           </ul>
           <div id='search'>
-            <label htmlFor='search-field'>SEARCH</label>
             <input
               type='text'
               placeholder='Enter search here'

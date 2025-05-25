@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useSearchParams, Link, useNavigate } from 'react-router-dom'
 import './styles/movie.css'
@@ -118,6 +118,7 @@ function Title () {
       }
       else {
         console.log(response.data.msg)
+        alert(response.data.msg)
       }
     })
   }
@@ -140,7 +141,6 @@ function Title () {
               </li>
             </ul>
             <div id='search'>
-              <label htmlFor='search-field'>SEARCH</label>
               <input
                 type='text'
                 placeholder='Enter search here'

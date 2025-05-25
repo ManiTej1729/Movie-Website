@@ -65,28 +65,34 @@ h1#logo {
   font-size: 40px;
   left: 0;
 }
+/* Container styling */
 #sub-navigation {
-  display: block;
-  clear: right;
-  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e2f;
+  padding: 15px 30px;
+  font-family: Arial, sans-serif;
 }
+
+/* Navigation list */
 #sub-navigation ul {
   list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
 }
-#sub-navigation ul li {
-  float: left;
-  display: inline;
-  padding-right: 23px;
-}
-#sub-navigation ul li a {
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  line-height: 24px;
+
+#sub-navigation li a {
   text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
-#sub-navigation ul li a:hover {
-  color: #f3b12b;
+
+#sub-navigation li a:hover {
+  color: #e7b038;
 }
 #main {
   padding: 20px 0;
