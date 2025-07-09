@@ -137,8 +137,16 @@ h1#logo {
   cursor: pointer;
   border-radius: 5px;
 }
+.list-item {
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  display: inline-block;
+}
 .remove-btn {
   float: right;
+  cursor: pointer;
 }
 
 .center {

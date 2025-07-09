@@ -9,11 +9,13 @@ function Signup () {
   const [pwd, setPwd] = useState("")
   const [errMsg, setErrMsg] = useState("")
 
+  const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+
   const navigate = useNavigate();
 
   async function handleSubmit (e) {
     e.preventDefault()
-    const response = await axios.post(`${process.env.BACKEND_BASE_URL}/signup`, {
+    const response = await axios.post(`${BASE_URL}/signup`, {
       name: username,
       email: email,
       pwd: pwd

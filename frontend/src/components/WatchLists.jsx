@@ -10,6 +10,8 @@ function WatchList () {
   const navigate = useNavigate()
   const email = localStorage.getItem('token')
 
+  const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+
   useEffect(() => {
     console.log(email, typeof email)
     if (email === "" || email === null || email === undefined) {
@@ -19,7 +21,7 @@ function WatchList () {
 
   useEffect(() => {
     // get all the watch lists
-    axios.post(`${process.env.BACKEND_BASE_URL}/getLists`, { email: email })
+    axios.post(`${BASE_URL}/getLists`, { email: email })
     .then(response => {
       console.log(response.data)
       setLists(response.data.lists)
@@ -38,7 +40,7 @@ function WatchList () {
     if (listName === "") {
       return
     }
-    axios.post(`${process.env.BACKEND_BASE_URL}/addList`, {
+    axios.post(`${BASE_URL}/addList`, {
       listName,
       email
     }).then(response => {
@@ -54,11 +56,43 @@ function WatchList () {
   }
 
   function removeMovie(listName, movie_name) {
-    console.log(listName, movie_name)
+    if (confirm(`Are you sure you want to remove ${movie_name} from ${listName}?`)) {
+      axios.post(`${BASE_URL}/removeMfromL`, {
+        email,
+        listName,
+        movieName: movie_name
+      }).then(response => {
+        console.log(response.data);
+        if (response.data.msg === `Removed ${movie_name} from ${listName}`) {
+          // trigger re-render
+          setReRender((past) => !past)
+        }
+        else {
+          alert(response.data.msg)
+        }
+      })
+    }
   }
   
   function deleteWatchList(listName) {
-    console.log(listName)
+    if (confirm(`Are you sure you want to delete the watchlist ${listName}?`)) {
+      axios.post(`${BASE_URL}/deleteList`, {
+        email,
+        listName
+      }).then(response => {
+        console.log(response.data);
+        if (response.data.msg === `Watchlist ${listName} deleted successfully`) {
+          // trigger re-render
+          setReRender((past) => !past)
+        }
+        else {
+          alert(response.data.msg)
+        }
+      })
+    }
+    else {
+      return
+    }
   }
 
   return (
@@ -91,7 +125,10 @@ function WatchList () {
               <h2>{listObj.listName}</h2>
               <ul>
                 {listObj.movies.map((movie_name, idx) => {
-                  return <li onClick={() => {openMovie(movie_name)}} key={idx}>{movie_name}<button className="remove-btn" onClick={removeMovie(listObj.listName, movie_name)}>Remove</button></li>
+                  return (
+                    <><li className='list-item' onClick={() => {openMovie(movie_name)}} key={idx}>{movie_name}</li>
+                    <button className="remove-btn" onClick={() => removeMovie(listObj.listName, movie_name)}>Remove</button><br /></>
+                  )
                 })}
               </ul>
             </div>

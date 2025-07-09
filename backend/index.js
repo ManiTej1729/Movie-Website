@@ -149,6 +149,42 @@ app.post('/addMtoL', async (req, res) => {
   }
 })
 
+app.post('/removeMfromL', async (req, res) => {
+  console.log(req.body)
+  const email = req.body.email
+  const user = await User.findOne({ email: email }, { watchLists: 1 })
+  const watchListsArray = user.watchLists
+  for (listObj of watchListsArray) {
+    if (listObj.listName === req.body.listName) {
+      const movieIndex = listObj.movies.indexOf(req.body.movieName)
+      if (movieIndex !== -1) {
+        listObj.movies.splice(movieIndex, 1)
+        await User.updateOne({ email: email }, { $set: { watchLists: watchListsArray } })
+        res.json({ msg: `Removed ${req.body.movieName} from ${req.body.listName}` })
+      }
+      else {
+        res.json({ msg: `The movie ${req.body.movieName} is not in ${req.body.listName}` })
+      }
+      break
+    }
+  }
+})
+
+app.post('/deleteList', async (req, res) => {
+  console.log(req.body)
+  const email = req.body.email
+  const user = await User.findOne({ email: email }, { watchLists: 1 })
+  const watchListsArray = user.watchLists
+  const updatedWatchLists = watchListsArray.filter(listObj => listObj.listName !== req.body.listName)
+  if (updatedWatchLists.length === watchListsArray.length) {
+    res.json({ msg: `Watchlist ${req.body.listName} does not exist` })
+  }
+  else {
+    await User.updateOne({ email: email }, { $set: { watchLists: updatedWatchLists } })
+    res.json({ msg: `Watchlist ${req.body.listName} deleted successfully` })
+  }
+})
+
 app.listen(port, () => {
   console.log(`Backend server running on port ${port}`)
 })

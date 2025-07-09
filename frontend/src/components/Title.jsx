@@ -10,6 +10,8 @@ function Title () {
 
   const navigate = useNavigate()
 
+  const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+
   const apikey = '8e52cc67'
   const [params] = useSearchParams()
   const title = params.get('t')
@@ -72,7 +74,7 @@ function Title () {
 
   useEffect(() => {
     // get all the watch lists
-    axios.post(`${process.env.BACKEND_BASE_URL}/getLists`, { email: email })
+    axios.post(`${BASE_URL}/getLists`, { email: email })
     .then(response => {
       const wholeData = response.data.lists
       console.log(wholeData)
@@ -107,7 +109,7 @@ function Title () {
   function addToWatchList(listName) {
     console.log(listName)
     let movieName = title
-    axios.post(`${process.env.BACKEND_BASE_URL}/addMtoL`, {
+    axios.post(`${BASE_URL}/addMtoL`, {
       email: email,
       listName: listName,
       movieName: movieName

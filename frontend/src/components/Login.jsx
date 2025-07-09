@@ -14,7 +14,7 @@ function Login () {
 
   async function handleSubmit (e) {
     e.preventDefault()
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/login`, {
+    const response = await axios.post(`${BASE_URL}/login`, {
       email: email,
       pwd: pwd
     })
