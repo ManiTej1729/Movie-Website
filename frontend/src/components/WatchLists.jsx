@@ -56,7 +56,7 @@ function WatchList () {
   }
 
   function removeMovie(listName, movie_name) {
-    if (confirm(`Are you sure you want to remove ${movie_name} from ${listName}?`)) {
+    if (window.confirm(`Are you sure you want to remove ${movie_name} from ${listName}?`)) {
       axios.post(`${BASE_URL}/removeMfromL`, {
         email,
         listName,
@@ -75,7 +75,7 @@ function WatchList () {
   }
   
   function deleteWatchList(listName) {
-    if (confirm(`Are you sure you want to delete the watchlist ${listName}?`)) {
+    if (window.confirm(`Are you sure you want to delete the watchlist ${listName}?`)) {
       axios.post(`${BASE_URL}/deleteList`, {
         email,
         listName

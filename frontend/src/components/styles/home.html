@@ -98,7 +98,7 @@
 
       function deleteWatchList(listName) {
         if (
-          confirm(`Are you sure you want to delete the watch list ${listName}?`)
+          window.confirm(`Are you sure you want to delete the watch list ${listName}?`)
         ) {
           const lists = document.querySelectorAll(".list");
           lists.forEach((list) => {
@@ -129,7 +129,7 @@
       }
 
       function removeMovie(listName, movieName) {
-        if (confirm(`Are you sure you want to remove ${movieName} from ${listName}?`)) {
+        if (window.confirm(`Are you sure you want to remove ${movieName} from ${listName}?`)) {
           fetch("/removeMovie", {
             method: "POST",
             headers: {
