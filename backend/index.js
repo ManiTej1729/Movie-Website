@@ -6,10 +6,13 @@ const bodyParser = require('body-parser')
 const bcryptjs = require('bcryptjs')
 
 const app = express()
-app.use(cors())
+app.use(cors({
+  origin: 'https://movie-website-theta-ten.vercel.app/',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}))
 app.use(bodyParser.json())
 
-console.log(process.env.MONGO_URI)
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -79,41 +82,32 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/signup', async (req, res) => {
-  console.log(req.body)
   let found = await User.find({email: req.body.email})
   if (found.length !== 0) {
     res.json({msg: 'User already exists'})
   }
   else {
     const hashedPwd = await bcryptjs.hash(req.body.pwd, 10)
-    console.log(hashedPwd)
     const newUser = new User({
       username: req.body.name,
       email: req.body.email,
       password: hashedPwd
     })
     await newUser.save()
-    console.log('User inserted')
     found = await User.findOne({ email: req.body.email }, { email: 1 })
-    console.log(found)
     res.json({ msg: 'Sign-in successful', uId: found._id, email: found.email })
   }
 })
 
 app.post('/getLists', async (req, res) => {
-  // console.log("request printing", req.body)
   const found = await User.findOne({ email: req.body.email }, { watchLists: 1 })
-  // console.log("found user", found)
   const response = found.watchLists
-  // console.log("generated response", response)
   res.json({ lists: response })
 })
 
 app.post('/addList', async (req, res) => {
-  console.log(req.body)
   const email = req.body.email
   const user = await User.findOne({ email: email }, { watchLists: 1 })
-  console.log("user", user)
   const watchListsArray = user.watchLists
   let repeated = 0;
   for (listObj of watchListsArray) {
@@ -130,7 +124,6 @@ app.post('/addList', async (req, res) => {
 })
 
 app.post('/addMtoL', async (req, res) => {
-  console.log(req.body)
   const email = req.body.email
   const user = await User.findOne({ email: email }, { watchLists: 1 })
   const watchListsArray = user.watchLists
@@ -150,7 +143,6 @@ app.post('/addMtoL', async (req, res) => {
 })
 
 app.post('/removeMfromL', async (req, res) => {
-  console.log(req.body)
   const email = req.body.email
   const user = await User.findOne({ email: email }, { watchLists: 1 })
   const watchListsArray = user.watchLists
@@ -171,7 +163,6 @@ app.post('/removeMfromL', async (req, res) => {
 })
 
 app.post('/deleteList', async (req, res) => {
-  console.log(req.body)
   const email = req.body.email
   const user = await User.findOne({ email: email }, { watchLists: 1 })
   const watchListsArray = user.watchLists

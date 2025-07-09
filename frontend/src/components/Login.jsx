@@ -10,7 +10,6 @@ function Login () {
 
   const navigate = useNavigate();
   const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
-  console.log(BASE_URL)
 
   async function handleSubmit (e) {
     e.preventDefault()

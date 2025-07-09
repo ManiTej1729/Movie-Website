@@ -13,7 +13,6 @@ function WatchList () {
   const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
   useEffect(() => {
-    console.log(email, typeof email)
     if (email === "" || email === null || email === undefined) {
       navigate('/')
     }
@@ -36,7 +35,6 @@ function WatchList () {
 
   function createWatchList() {
     const listName = prompt("Enter the new watch list's name")
-    console.log(listName, typeof listName)
     if (listName === "") {
       return
     }

@@ -37,7 +37,6 @@ function Title () {
   const [modal, setModal] = useState('modal')
   const [shellClass, setShellClass] = useState('')
   const [lists, setLists] = useState([])
-  console.log(lists)
 
   useEffect(() => {
     axios
@@ -80,11 +79,9 @@ function Title () {
     axios.post(`${BASE_URL}/getLists`, { email: email })
     .then(response => {
       const wholeData = response.data.lists
-      console.log(wholeData)
       setLists(() => {
         return [...wholeData]
       })
-      console.log(lists)
     })
   }, [title])
 
@@ -96,17 +93,13 @@ function Title () {
   }
 
   function showModal () {
-    console.log('modal open')
     setModal((modal) => modal + ' ' + 'flex')
     setShellClass('fade-background')
-    console.log(modal, shellClass)
   }
   
   function closeModal () {
-    console.log('modal close')
     setModal((modal) => modal.slice(0, 5))
     setShellClass('')
-    console.log(modal, shellClass)
   }
 
   function addToWatchList(listName) {
