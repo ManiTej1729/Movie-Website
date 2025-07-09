@@ -22,7 +22,10 @@ function Search () {
 
   const [params] = useSearchParams()
   const query = params.get('s')
-  const apikey = '8e52cc67'
+  const apikey = process.env.OMDB_API_KEY
+  if (!apikey) {
+    console.error('OMDB_API_KEY is not defined in the environment variables.')
+  }
 
   const defaultObj = {
     name: "Loading...",

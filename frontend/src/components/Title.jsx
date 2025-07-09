@@ -12,7 +12,10 @@ function Title () {
 
   const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
-  const apikey = '8e52cc67'
+  const apikey = process.env.OMDB_API_KEY
+  if (!apikey) {
+    console.error('OMDB_API_KEY is not defined in the environment variables.')
+  }
   const [params] = useSearchParams()
   const title = params.get('t')
   const movie = {
