@@ -19,7 +19,7 @@ function WatchList () {
 
   useEffect(() => {
     // get all the watch lists
-    axios.post('http://localhost:5500/getLists', { email: email })
+    axios.post(`${process.env.BACKEND_BASE_URL}/getLists`, { email: email })
     .then(response => {
       console.log(response.data)
       setLists(response.data.lists)
@@ -38,7 +38,7 @@ function WatchList () {
     if (listName === "") {
       return
     }
-    axios.post('http://localhost:5500/addList', {
+    axios.post(`${process.env.BACKEND_BASE_URL}/addList`, {
       listName,
       email
     }).then(response => {

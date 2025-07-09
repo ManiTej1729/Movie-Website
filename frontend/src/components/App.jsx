@@ -3,7 +3,6 @@ import Signup from './Signup';
 import Home from './Home';
 import Search from './Search';
 import Title from './Title';
-import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WatchList from './WatchLists';
 

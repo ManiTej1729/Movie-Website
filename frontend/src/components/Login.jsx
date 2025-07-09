@@ -9,10 +9,12 @@ function Login () {
   const [pwd, setPwd] = useState("")
 
   const navigate = useNavigate();
+  const BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+  console.log(BASE_URL)
 
   async function handleSubmit (e) {
     e.preventDefault()
-    const response = await axios.post('http://localhost:5500/login', {
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/login`, {
       email: email,
       pwd: pwd
     })

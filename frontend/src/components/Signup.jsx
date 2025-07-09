@@ -13,7 +13,7 @@ function Signup () {
 
   async function handleSubmit (e) {
     e.preventDefault()
-    const response = await axios.post('http://localhost:5500/signup', {
+    const response = await axios.post(`${process.env.BACKEND_BASE_URL}/signup`, {
       name: username,
       email: email,
       pwd: pwd

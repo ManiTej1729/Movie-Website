@@ -72,7 +72,7 @@ function Title () {
 
   useEffect(() => {
     // get all the watch lists
-    axios.post('http://localhost:5500/getLists', { email: email })
+    axios.post(`${process.env.BACKEND_BASE_URL}/getLists`, { email: email })
     .then(response => {
       const wholeData = response.data.lists
       console.log(wholeData)
@@ -107,7 +107,7 @@ function Title () {
   function addToWatchList(listName) {
     console.log(listName)
     let movieName = title
-    axios.post('http://localhost:5500/addMtoL', {
+    axios.post(`${process.env.BACKEND_BASE_URL}/addMtoL`, {
       email: email,
       listName: listName,
       movieName: movieName

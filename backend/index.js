@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -8,8 +9,9 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+console.log(process.env.MONGO_URI)
 mongoose
-  .connect('mongodb://127.0.0.1:27017/mdb', {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -20,7 +22,7 @@ mongoose
     console.error('Connection error un-official', error)
   })
 
-const port = 5500
+const port = process.env.PORT || 5500
 
 const watchListSchema = new mongoose.Schema({
   listName: {
