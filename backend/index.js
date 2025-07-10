@@ -7,7 +7,7 @@ const bcryptjs = require('bcryptjs')
 
 const app = express()
 app.use(cors({
-  origin: 'https://movie-website-theta-ten.vercel.app/',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
