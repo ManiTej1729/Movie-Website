@@ -36,7 +36,7 @@ function Search () {
 
   useEffect(() => {
     axios
-      .get(`http://www.omdbapi.com/?s=${query}&apikey=${apikey}`)
+      .get(`https://www.omdbapi.com/?s=${query}&apikey=${apikey}`)
       .then(response => {
         console.log(response.data)
         const tempMovies = response.data.Search

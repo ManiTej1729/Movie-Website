@@ -40,7 +40,7 @@ function Title () {
 
   useEffect(() => {
     axios
-      .get(`http://www.omdbapi.com/?t=${title}&apikey=${apikey}`)
+      .get(`https://www.omdbapi.com/?t=${title}&apikey=${apikey}`)
       .then(response => {
         // console.log(response.data)
         setData(oldData => {
