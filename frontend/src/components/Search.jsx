@@ -22,9 +22,9 @@ function Search () {
 
   const [params] = useSearchParams()
   const query = params.get('s')
-  const apikey = process.env.OMDB_API_KEY
+  const apikey = process.env.REACT_APP_OMDB_API_KEY
   if (!apikey) {
-    console.error('OMDB_API_KEY is not defined in the environment variables.')
+    console.error('REACT_APP_OMDB_API_KEY is not defined in the environment variables.')
   }
 
   const defaultObj = {
