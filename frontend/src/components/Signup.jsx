@@ -41,7 +41,7 @@ function Signup () {
         <form onSubmit={handleSubmit} method='post'>
           <input
             value={username}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             type='text'
             placeholder='Username'
             required
