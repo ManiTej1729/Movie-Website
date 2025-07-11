@@ -6,8 +6,18 @@ const bodyParser = require('body-parser')
 const bcryptjs = require('bcryptjs')
 
 const app = express()
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://movie-website-theta-ten.vercel.app'
+];
 app.use(cors({
-  origin: 'https://movie-website-theta-ten.vercel.app/*',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }))
